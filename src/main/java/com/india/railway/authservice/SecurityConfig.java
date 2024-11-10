@@ -48,20 +48,30 @@ public class SecurityConfig {
          */
 
         http.csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/", "/authenticate").permitAll() // Allow access to root URL
-                        .anyRequest().authenticated() // All other URLs require authentication
-                )
+                .authorizeHttpRequests(authorizeRequests -> {
+                    try {
+                        authorizeRequests
+                                .requestMatchers("/", "/authenticate").permitAll() // Allow access to root URL
+                                .anyRequest().authenticated(); // All other URLs require authentication
+                        // .and()
+                        // .oauth2Login()
+                        // .defaultSuccessUrl("/home", true); // Redirects to /home after successful
+                        // login
 
-                // .oauth2Login() // Enables OAuth2 login
-                // .defaultSuccessUrl("/home", true);
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+
+                );
+        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter,
-                        UsernamePasswordAuthenticationFilter.class)
+                        UsernamePasswordAuthenticationFilter.class);
 
-                .formLogin() // Enable form-based login
-                .and()
-                .logout();
+        // .formLogin() // Enable form-based login
+        // .and()
+        // .logout();
         // E
 
         /*

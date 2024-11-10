@@ -27,7 +27,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/home")
     public String test(Model model) {
         model.addAttribute("name", "Test User");
         return "index";

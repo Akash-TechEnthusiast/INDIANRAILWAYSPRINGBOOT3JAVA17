@@ -36,6 +36,10 @@ public class UserService {
     @Autowired
     private PasswordResetTokenRepository passwordResetTokenRepository;
 
+    public String greetUser(String name) {
+        return "Hello, " + name;
+    }
+
     public User saveUser(User user) {
         return userRepository.save(user);
     }
