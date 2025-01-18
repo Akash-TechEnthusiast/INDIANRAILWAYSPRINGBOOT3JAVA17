@@ -1,10 +1,15 @@
 package com.india.railway.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.india.railway.authservice.JwtRequest;
@@ -21,7 +26,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository UserRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private JwtUtils jwtUtil;
@@ -29,9 +34,11 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public JwtResponse createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 
-        authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
-        final User userDetails = UserRepository.findByUsername(jwtRequest.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+        // authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+        final User userDetails = userRepository.findByUsername(
+                jwtRequest.getUsername());
+
+        final String jwt = jwtUtil.generateToken(userDetails.getUsername(), userDetails.getRoles());
 
         return new JwtResponse(jwt);
     }
@@ -46,6 +53,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasRole('USERUSER')")
     public String register(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         // user.setPassword("test");
@@ -53,7 +61,7 @@ public class AuthenticationController {
         user.setMobileno(user.getMobileno());
         // save the user to the database
         // ...
-        UserRepository.save(user);
+        userRepository.save(user);
         return "User registered successfully";
     }
 }

@@ -1,14 +1,10 @@
 package com.india.railway.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import java.util.List;
+
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +29,28 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "profile_id", referencedColumnName = "id")
 	private UserProfile userProfile;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", // Name of the join table
+			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), // Foreign key in
+																						// join table
+																						// pointing to
+																						// Passenger
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") // Foreign
+																							// key in
+																							// join
+	)
+	// @NotEmpty(message = "Passenger must have at least one address.")
+
+	private List<Role> roles;
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 
 	public User() {
 	}

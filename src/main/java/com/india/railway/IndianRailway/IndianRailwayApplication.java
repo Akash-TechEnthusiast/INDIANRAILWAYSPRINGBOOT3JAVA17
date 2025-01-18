@@ -28,6 +28,7 @@ public class IndianRailwayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(IndianRailwayApplication.class, args);
+
 	}
 
 	@Bean

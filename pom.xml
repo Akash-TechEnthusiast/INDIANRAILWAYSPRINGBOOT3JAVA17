@@ -61,6 +61,8 @@
     <version>0.11.5</version>
     <scope>runtime</scope>
 </dependency>
+
+
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
     <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if you prefer Gson -->
@@ -90,6 +92,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-oauth2-client</artifactId>
     </dependency>
+	 <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency> 
 
 		  	<dependency>
     <groupId>org.projectlombok</groupId>
@@ -104,10 +110,7 @@
     <version>2.0.1</version>
 </dependency>
   
-		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
+	
 
 
 		<dependency>

@@ -24,12 +24,13 @@ public class RefreshTokenController {
         }
 
         String username = claims.getSubject();
-        String newToken = jwtUtil.generateToken(username);
+        // String newToken = jwtUtil.generateToken(username,);
+        String newToken = null;
 
         return ResponseEntity.ok(new AuthResponse(newToken));
     }
 
-    public static class AuthResponse {
+    public  class AuthResponse {
         private String jwt;
 
         public AuthResponse(String jwt) {

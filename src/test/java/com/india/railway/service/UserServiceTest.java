@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = IndianRailwayApplication.class)
-public class MyServiceTest {
+public class UserServiceTest {
 
     @Autowired
     private UserService userService;
@@ -23,7 +23,7 @@ public class MyServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void testGetData() {
+    void test_user_save() {
 
         UserProfile uf = new UserProfile();
         uf.setEmail("test");

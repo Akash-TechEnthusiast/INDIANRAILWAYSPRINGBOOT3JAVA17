@@ -36,6 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (header != null && header.startsWith("Bearer ")) {
             token = header.substring(7); // Remove "Bearer " prefix
+            System.out.println("Received token   " + token);
             username = jwtUtils.getUsernameFromToken(token); // Get username from token
         }
 

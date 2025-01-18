@@ -69,60 +69,10 @@ public class SecurityConfig {
                 .addFilterBefore(jwtRequestFilter,
                         UsernamePasswordAuthenticationFilter.class);
 
-        // .formLogin() // Enable form-based login
-        // .and()
-        // .logout();
-        // E
-
-        /*
-         * http.csrf(customizer -> customizer.disable());
-         * http.authorizeHttpRequests(
-         * request -> request.requestMatchers("/",
-         * "/authenticate", "/register", "/test").permitAll());
-         * http.formLogin(Customizer.withDefaults());
-         * http.httpBasic(Customizer.withDefaults());
-         * http.sessionManagement(session ->
-         * session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-         * // Configure form login
-         * 
-         * .formLogin(form -> form
-         * .loginPage("/login") // Custom login page
-         * .permitAll() // Allow everyone to see the login page
-         * )
-         * // Configure logout
-         * .logout(logout -> logout
-         * .permitAll());
-         */
         ;
-
-        /*
-         * httl
-         * // Specify URL-based authorization using requestMatchers
-         * .authorizeHttpRequests(authorize -> authorize
-         * .requestMatchers("/login", "/test").permitAll() // Allow public access to
-         * URLs under "/public"
-         * // .requestMatchers("/admin/**").hasRole("ADMIN") // Restrict URLs under
-         * // "/admin" to users with the
-         * // ADMIN role
-         * .anyRequest().authenticated() // Require authentication for any other request
-         * );
-         */
-        // Enable form-based login and configure login page if needed
-
-        // Disable CSRF for testing purposes (not recommended in production)
 
         return http.build();
     }
-
-    /*
-     * @Bean
-     * public AuthenticationProvider authenticationProvider() {
-     * DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-     * provider.setUserDetailsService(userDetailsService);
-     * provider.setPasswordEncoder(new BCryptPasswordEncoder());
-     * return provider;
-     * }
-     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -135,6 +85,16 @@ public class SecurityConfig {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         return auth.build();
     }
+
+    /*
+     * @Bean
+     * public AuthenticationProvider authenticationProvider() {
+     * DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+     * provider.setUserDetailsService(userDetailsService);
+     * provider.setPasswordEncoder(new BCryptPasswordEncoder());
+     * return provider;
+     * }
+     */
 
     /*
      * 
