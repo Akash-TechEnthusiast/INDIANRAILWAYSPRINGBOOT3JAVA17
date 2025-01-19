@@ -1,21 +1,14 @@
 package com.india.railway.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.india.railway.authservice.JwtRequest;
 import com.india.railway.authservice.JwtResponse;
 import com.india.railway.authservice.JwtUtils;
-import com.india.railway.controller.RefreshTokenController.AuthResponse;
 import com.india.railway.model.User;
 import com.india.railway.repository.UserRepository;
 
@@ -34,7 +27,7 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public JwtResponse createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 
-        // authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
+        authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
         final User userDetails = userRepository.findByUsername(
                 jwtRequest.getUsername());
 
@@ -53,7 +46,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('USERUSER')")
+    @PreAuthorize("hasRole('USER')") // TEST (it should be added as ROLE_USER in spring context)
     public String register(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         // user.setPassword("test");

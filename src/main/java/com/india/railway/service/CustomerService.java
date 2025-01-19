@@ -34,7 +34,7 @@ public class CustomerService {
 	}
 
 	// fetch operation to get customer using an ID
-	public Customer getCustomerById(int id) {
+	public Customer getCustomerById(Long id) {
 
 		Optional<Customer> optionalCustomer = repo.findById(String.valueOf(id));
 		return optionalCustomer.orElse(null);
@@ -61,7 +61,7 @@ public class CustomerService {
 	}
 
 	// delete the existing customer
-	public void deleteCustomerById(int id) {
+	public void deleteCustomerById(Long id) {
 		repo.deleteById(String.valueOf(id));
 	}
 

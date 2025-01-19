@@ -9,8 +9,8 @@ public class Customer {
 
 	@Id
 	@Indexed
-	private int id; // "indexed" for faster retrieval,
-					// @Id for marking this field as the key
+	private Long id; // "indexed" for faster retrieval,
+						// @Id for marking this field as the key
 	private String name;
 	private long phone;
 	private String email;
@@ -22,11 +22,11 @@ public class Customer {
 				+ "]";
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
