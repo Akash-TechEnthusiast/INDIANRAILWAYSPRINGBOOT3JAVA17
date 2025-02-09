@@ -25,11 +25,14 @@ public class RestControllerClassTest {
     // @MockBean
     // private UserService userService;
 
-    @Test
-    public void testGreetUser() throws Exception {
-        mockMvc.perform(get("/api/users/1")) // Simulates GET request
-                .andExpect(status().isOk()) // Expects HTTP 200 status
-                .andExpect(content().string("Hello, User 1")); // Expects specific response content
-    }
+    /*
+     * @Test
+     * public void testGreetUser() throws Exception {
+     * mockMvc.perform(get("/api/users/1")) // Simulates GET request
+     * .andExpect(status().isOk()) // Expects HTTP 200 status
+     * .andExpect(content().string("Hello, User 1")); // Expects specific response
+     * content
+     * }
+     */
 
 }

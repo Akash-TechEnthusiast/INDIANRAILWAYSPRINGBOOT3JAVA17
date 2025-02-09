@@ -12,7 +12,10 @@ import com.india.railway.authservice.JwtUtils;
 import com.india.railway.model.User;
 import com.india.railway.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class AuthenticationController {
 
     @Autowired
@@ -30,7 +33,8 @@ public class AuthenticationController {
         authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
         final User userDetails = userRepository.findByUsername(
                 jwtRequest.getUsername());
-
+            
+        log.info("Received Request at authenticaton controller");
         final String jwt = jwtUtil.generateToken(userDetails.getUsername(), userDetails.getRoles());
 
         return new JwtResponse(jwt);

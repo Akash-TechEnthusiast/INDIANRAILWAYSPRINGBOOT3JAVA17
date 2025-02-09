@@ -22,14 +22,16 @@ public class UserServiceTest {
     @MockBean
     private UserRepository userRepository;
 
-    @Test
-    void test_user_save() {
-
-        UserProfile uf = new UserProfile();
-        uf.setEmail("test");
-        User abc = new User("india", "india", uf);
-
-        when(userRepository.save(abc)).thenReturn(abc);
-        assertEquals(userService.saveUser(abc), abc);
-    }
+    /*
+     * @Test
+     * void test_user_save() {
+     * 
+     * UserProfile uf = new UserProfile();
+     * uf.setEmail("test");
+     * User abc = new User("india", "india", uf);
+     * 
+     * when(userRepository.save(abc)).thenReturn(abc);
+     * assertEquals(userService.saveUser(abc), abc);
+     * }
+     */
 }

@@ -37,6 +37,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+
+			  <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
 		</dependency>
 
 		<dependency>
@@ -44,6 +51,13 @@
     <artifactId>jakarta.validation-api</artifactId>
     <version>3.0.2</version> <!-- Use the latest version -->
 </dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+</dependency>
+
+
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -82,6 +96,20 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
     </dependency>
+
+	<dependency>
+    <groupId>co.elastic.clients</groupId>
+	
+    <artifactId>elasticsearch-java</artifactId>
+    <version>8.10.2</version>  <!-- Use the latest version -->
+</dependency>
+
+
+	<dependency>
+    <groupId>org.elasticsearch.client</groupId>
+    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+    <version>6.8.23</version>  <!-- Use a version matching your Elasticsearch server -->
+</dependency>
 
 		<dependency>
    			 <groupId>mysql</groupId>

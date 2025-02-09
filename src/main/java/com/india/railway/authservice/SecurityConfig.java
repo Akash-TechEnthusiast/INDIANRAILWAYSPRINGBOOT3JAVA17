@@ -53,7 +53,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     try {
                         authorizeRequests
-                                .requestMatchers("/", "/authenticate").permitAll() // Allow access to root URL
+                                .requestMatchers("/", "/authenticate", "/products", "/products/suggest").permitAll() // Allow
+                                                                                                                     // access
+                                                                                                                     // to
+                                                                                                                     // root
+                                // URL
                                 .anyRequest().authenticated(); // All other URLs require authentication
                         // .and()
                         // .oauth2Login()

@@ -56,4 +56,15 @@ public class EmployeeServiceImpl implements EmployeService {
 		return empRespository.findAll();
 	}
 
+	@Override
+	public void deleteEmployee(Long id) {
+
+		if (empRespository.existsById(id)) {
+			empRespository.deleteById(id);
+		} else {
+			throw new RuntimeException("Employee not found with ID: " + id);
+		}
+
+	}
+
 }
