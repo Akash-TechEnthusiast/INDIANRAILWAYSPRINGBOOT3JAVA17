@@ -41,7 +41,7 @@ public class ProductController {
 
     @GetMapping("/suggest")
     public List<String> getSuggestions(@RequestParam String query) {
-        return productService.getAutoSuggestions(query);
+        return productService.getAutoSuggestionsOnName(query);
     }
 
 }

@@ -46,6 +46,22 @@ public class ProductService {
         productRepository.deleteAll();
     }
 
+    public List<String> getAutoSuggestionsOnName(String prefix) {
+        NativeQuery query = NativeQuery.builder()
+                .withQuery(q -> q
+                        .matchPhrasePrefix(m -> m
+                                .field("name") // ✅ Changed from "suggestions" to "name"
+                                .query(prefix)))
+                .build();
+
+        SearchHits<Product> searchHits = elasticsearchOperations.search(query, Product.class);
+
+        List<String> suggestions = new ArrayList<>();
+        searchHits.forEach(hit -> suggestions.add(hit.getContent().getName())); // ✅ Extract name field
+
+        return suggestions;
+    }
+
     public List<String> getAutoSuggestions(String prefix) {
 
         Query query = NativeQuery.builder()
@@ -61,5 +77,32 @@ public class ProductService {
         searchHits.forEach(hit -> suggestions.addAll(hit.getContent().getSuggestions()));
 
         return suggestions;
+
+        /*
+         * Explanation
+         * 
+         * NativeQuery → Used to build Elasticsearch queries in Spring Data
+         * Elasticsearch.
+         * Query → Represents the search query.
+         * SearchHits → Stores the search results.
+         * QueryBuilders → Helps in constructing Elasticsearch queries.
+         * 
+         * NativeQuery.builder() → Starts building a native Elasticsearch query.
+         * .withQuery(q -> q.matchPhrasePrefix(...))
+         * matchPhrasePrefix → Searches for words starting with the given prefix.
+         * field("suggestions") → Searches in the suggestions field.
+         * query(prefix) → Uses the user's input to find matching suggestions.
+         * .build() → Finalizes and creates the query.
+         * 
+         * 
+         * 
+         * 
+         * 
+         * Creates a list to store suggestions.
+         * Iterates through search results (searchHits).
+         * Extracts the suggestions field from each product.
+         * Adds them to the list.
+         */
+
     }
 }

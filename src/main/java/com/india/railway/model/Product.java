@@ -53,6 +53,55 @@ public class Product {
     }
 
     // Getters and Setters
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public List<String> getSuggestions() {
         return suggestions;
     }
@@ -60,4 +109,5 @@ public class Product {
     public void setSuggestions(List<String> suggestions) {
         this.suggestions = suggestions;
     }
+
 }
