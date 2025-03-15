@@ -3,19 +3,17 @@ package com.india.railway.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.suggest.SuggestBuilder;
-import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
-import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.stereotype.Service;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 
+
 import com.india.railway.elasticrepo.ProductRepository;
-import com.india.railway.model.Product;
+import com.india.railway.model.Product_Elastic;
 
 import java.util.List;
 
@@ -29,16 +27,16 @@ public class ProductService {
     private ElasticsearchOperations elasticsearchOperations;
 
     // Save a new product
-    public Product saveProduct(Product product) {
+    public Product_Elastic saveProduct(Product_Elastic product) {
 
         return productRepository.save(product);
     }
 
-    public Iterable<Product> getAllProducts() {
+    public Iterable<Product_Elastic> getAllProducts() {
         return productRepository.findAll();
     }
 
-    public List<Product> searchProductsByName(String name) {
+    public List<Product_Elastic> searchProductsByName(String name) {
         return productRepository.findByName(name);
     }
 
@@ -54,7 +52,7 @@ public class ProductService {
                                 .query(prefix)))
                 .build();
 
-        SearchHits<Product> searchHits = elasticsearchOperations.search(query, Product.class);
+        SearchHits<Product_Elastic> searchHits = elasticsearchOperations.search(query, Product_Elastic.class);
 
         List<String> suggestions = new ArrayList<>();
         searchHits.forEach(hit -> suggestions.add(hit.getContent().getName())); // ✅ Extract name field
@@ -71,12 +69,14 @@ public class ProductService {
                                 .query(prefix)))
                 .build();
 
-        SearchHits<Product> searchHits = elasticsearchOperations.search(query, Product.class);
+        SearchHits<Product_Elastic> searchHits = elasticsearchOperations.search(query, Product_Elastic.class);
 
         List<String> suggestions = new ArrayList<>();
         searchHits.forEach(hit -> suggestions.addAll(hit.getContent().getSuggestions()));
 
         return suggestions;
+
+    }
 
         /*
          * Explanation
@@ -104,5 +104,5 @@ public class ProductService {
          * Adds them to the list.
          */
 
-    }
+  
 }

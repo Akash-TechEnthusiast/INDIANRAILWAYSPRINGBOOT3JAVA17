@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.india.railway.model.Customer;
+import com.india.railway.model.Customer_Redis;
 import com.india.railway.repository.CustomerRepo;
 
 @Service
@@ -19,35 +19,35 @@ public class CustomerService {
 	private CustomerRepo repo;
 
 	// to insert new customer data into the Redis database
-	public Customer addCustomer(Customer customer) {
+	public Customer_Redis addCustomer(Customer_Redis customer) {
 
 		return repo.save(customer);
 	}
 
 	// run a fetch query in the Redis Database
 	// to get a list of all the customers
-	public List<Customer> getAllCustomers() {
+	public List<Customer_Redis> getAllCustomers() {
 
-		List<Customer> allCustomer = new ArrayList<>();
+		List<Customer_Redis> allCustomer = new ArrayList<>();
 		repo.findAll().forEach(allCustomer::add);
 		return allCustomer;
 	}
 
 	// fetch operation to get customer using an ID
-	public Customer getCustomerById(Long id) {
+	public Customer_Redis getCustomerById(Long id) {
 
-		Optional<Customer> optionalCustomer = repo.findById(String.valueOf(id));
+		Optional<Customer_Redis> optionalCustomer = repo.findById(String.valueOf(id));
 		return optionalCustomer.orElse(null);
 	}
 
 	// update operation to existing customer using an ID
-	public Customer updateCustomerById(int id,
-			Customer newCustomer) {
+	public Customer_Redis updateCustomerById(int id,
+			Customer_Redis newCustomer) {
 
-		Optional<Customer> existingCustomer = repo.findById(String.valueOf(id));
+		Optional<Customer_Redis> existingCustomer = repo.findById(String.valueOf(id));
 
 		if (existingCustomer.isPresent()) {
-			Customer updatedCustomer = existingCustomer.get();
+			Customer_Redis updatedCustomer = existingCustomer.get();
 
 			updatedCustomer.setName(newCustomer.getName());
 			updatedCustomer.setPhone(newCustomer.getPhone());

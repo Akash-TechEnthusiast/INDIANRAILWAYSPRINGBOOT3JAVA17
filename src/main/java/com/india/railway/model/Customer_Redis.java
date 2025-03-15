@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
 @RedisHash(value = "Customer")
-public class Customer {
+public class Customer_Redis {
 
 	@Id
 	@Indexed

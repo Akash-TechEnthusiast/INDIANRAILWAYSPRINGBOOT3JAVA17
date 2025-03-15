@@ -12,11 +12,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.india.railway.service.CustomUserDetailsService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
+
 //import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,13 +56,14 @@ public class SecurityConfig {
          */
 
         http.csrf(customizer -> customizer.disable())
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource())) // ✅ Custom CORS
                 .authorizeHttpRequests(authorizeRequests -> {
                     try {
                         authorizeRequests
-                                .requestMatchers("/", "/authenticate", "/products", "/products/suggest").permitAll() // Allow
-                                                                                                                     // access
-                                                                                                                     // to
-                                                                                                                     // root
+                                .requestMatchers("/", "/authenticate", "/products/suggest").permitAll() // Allow
+                                                                                                        // access
+                                                                                                        // to
+                                                                                                        // root
                                 // URL
                                 .anyRequest().authenticated(); // All other URLs require authentication
                         // .and()
@@ -90,6 +97,19 @@ public class SecurityConfig {
         AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         return auth.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // ✅ Allow React app
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // ✅ Allowed Methods
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // ✅ Allow Auth Header
+        configuration.setAllowCredentials(true); // ✅ Allow Cookies & Credentials
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     /*

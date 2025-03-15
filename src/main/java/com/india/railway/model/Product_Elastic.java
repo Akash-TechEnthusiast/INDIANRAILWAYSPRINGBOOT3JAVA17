@@ -7,7 +7,6 @@ import org.springframework.data.elasticsearch.annotations.CompletionField;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.core.suggest.Completion;
 
 import lombok.Data;
 import java.util.Date;
@@ -15,7 +14,7 @@ import java.util.Date;
 // @Setting(shards = 3, replicas = 2)
 
 @Document(indexName = "newproduct")
-public class Product {
+public class Product_Elastic {
     @Id
     private String id;
 
@@ -38,10 +37,10 @@ public class Product {
     private List<String> suggestions; // This field will store autocomplete suggestions
 
     // Constructors
-    public Product() {
+    public Product_Elastic() {
     }
 
-    public Product(String id, String name, String description, Double price, Boolean available, Date createdAt,
+    public Product_Elastic(String id, String name, String description, Double price, Boolean available, Date createdAt,
             List<String> suggestions) {
         this.id = id;
         this.name = name;

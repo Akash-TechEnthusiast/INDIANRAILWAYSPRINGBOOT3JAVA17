@@ -1,35 +1,32 @@
 package com.india.railway.controller;
 
-import org.elasticsearch.search.suggest.SuggestBuilder;
-import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.india.railway.model.Product;
+import com.india.railway.model.Product_Elastic;
 import com.india.railway.service.ProductService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController {
+@RequestMapping("/products_elastic")
+public class ProductController_Elastic {
 
     @Autowired
     private ProductService productService;
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
+    public Product_Elastic createProduct(@RequestBody Product_Elastic product) {
         return productService.saveProduct(product);
     }
 
     @GetMapping
-    public Iterable<Product> getAllProducts() {
+    public Iterable<Product_Elastic> getAllProducts() {
         return productService.getAllProducts();
     }
 
     @GetMapping("/byName")
-    public List<Product> searchProducts(@RequestParam String name) {
+    public List<Product_Elastic> searchProducts(@RequestParam String name) {
         return productService.searchProductsByName(name);
     }
 

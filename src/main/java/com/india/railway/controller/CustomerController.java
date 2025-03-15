@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.india.railway.model.Customer;
+import com.india.railway.model.Customer_Redis;
 import com.india.railway.service.CustomerService;
 
 @RequestMapping(path = "/customer")
@@ -24,18 +24,18 @@ public class CustomerController {
     // private PasswordEncoder passwordEncoder;
 
     @GetMapping(path = "/users")
-    public @ResponseBody Iterable<Customer> getAllUsers() {
+    public @ResponseBody Iterable<Customer_Redis> getAllUsers() {
         // This returns a JSON or XML with the Book
         return customerService.getAllCustomers();
     }
 
     @PostMapping
-    public Customer createUser(@RequestBody Customer user) {
+    public Customer_Redis createUser(@RequestBody Customer_Redis user) {
         return customerService.addCustomer(user);
     }
 
     @GetMapping("/{id}")
-    public Customer getUserById(@PathVariable Long id) {
+    public Customer_Redis getUserById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
     }
 
