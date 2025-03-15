@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.india.railway.model.Customer_Redis;
-import com.india.railway.repository.CustomerRepo;
+import com.india.railway.repository.Customer_Redis_Repo;
 
 @Service
-public class CustomerService {
+public class Customer_Redis_Service {
 
 	// Injecting Repository into service class
 
 	@Autowired
-	private CustomerRepo repo;
+	private Customer_Redis_Repo repo;
 
 	// to insert new customer data into the Redis database
 	public Customer_Redis addCustomer(Customer_Redis customer) {

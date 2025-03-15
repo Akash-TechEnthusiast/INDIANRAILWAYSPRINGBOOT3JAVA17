@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.india.railway.model.Customer_Redis;
 
 @Repository
-public interface CustomerRepo extends CrudRepository<Customer_Redis, String> {
+public interface Customer_Redis_Repo extends CrudRepository<Customer_Redis, String> {
 
 }

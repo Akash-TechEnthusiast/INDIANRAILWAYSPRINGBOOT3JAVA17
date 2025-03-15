@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.india.railway.model.Customer_Redis;
-import com.india.railway.service.CustomerService;
+import com.india.railway.service.Customer_Redis_Service;
 
 @RequestMapping(path = "/customer")
 @RestController
-public class CustomerController {
+public class CustomerController_Redis {
 
     @Autowired
-    private CustomerService customerService;
+    private Customer_Redis_Service customerService;
 
     // @Autowired
     // private PasswordEncoder passwordEncoder;
 
-    @GetMapping(path = "/users")
+    @GetMapping(path = "/getallcustomer")
     public @ResponseBody Iterable<Customer_Redis> getAllUsers() {
         // This returns a JSON or XML with the Book
         return customerService.getAllCustomers();
