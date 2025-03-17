@@ -60,10 +60,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     try {
                         authorizeRequests
-                                .requestMatchers("/", "/authenticate", "/products/suggest").permitAll() // Allow
-                                                                                                        // access
-                                                                                                        // to
-                                                                                                        // root
+                                .requestMatchers("/", "/authenticate", "/products/suggest",
+                                        "/user/forgot-password", "/user/reset-password")
+                                .permitAll() // Allow
+                                // access
+                                // to
+                                // root
                                 // URL
                                 .anyRequest().authenticated(); // All other URLs require authentication
                         // .and()

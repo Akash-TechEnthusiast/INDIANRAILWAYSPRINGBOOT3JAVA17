@@ -1,7 +1,10 @@
 package com.india.railway.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.india.railway.model.User;
 import com.india.railway.model.UserProfile;
 import com.india.railway.service.UserService;
+import com.india.railway.model.ResetPasswordRequest;
 
 import reactor.core.publisher.Flux;
 
@@ -36,7 +40,7 @@ public class UserController {
 
 		user.setMobileno(number);
 		user.setEmail(email);
-		// user.setPassword(passwordEncoder.encode(password));
+		user.setPassword(new BCryptPasswordEncoder().encode(password));
 
 		UserProfile up = new UserProfile();
 		up.setEmail("user@gmail.com");
@@ -68,17 +72,22 @@ public class UserController {
 		userService.deleteUser(id);
 	}
 
+	// @RequestParam("email") String email
 	@PostMapping("/forgot-password")
-	public ResponseEntity<String> forgotPassword(@RequestParam("email") String email) {
+	public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> request) {
+
+		String email = request.get("email");
+		if (email == null || email.isEmpty()) {
+			return ResponseEntity.badRequest().body("Email is required");
+		}
 		userService.processForgotPassword(email);
 		return ResponseEntity.ok("Password reset link sent to email.");
 	}
 
 	@PostMapping("/reset-password")
-	public ResponseEntity<String> resetPassword(@RequestParam("token") String token,
-			@RequestParam("newPassword") String newPassword) {
-		System.out.println();
-		userService.resetPassword(token, newPassword);
+	public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) {
+
+		userService.resetPassword(resetPasswordRequest.getToken(), resetPasswordRequest.getPassword());
 		return ResponseEntity.ok("Password has been reset.");
 	}
 

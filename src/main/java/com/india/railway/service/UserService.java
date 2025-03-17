@@ -2,6 +2,7 @@ package com.india.railway.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.india.railway.model.PasswordResetToken;
@@ -76,7 +77,7 @@ public class UserService {
     // yhlynqtvepkqwpas
 
     private void sendResetEmail(User user, String token) {
-        String resetLink = "https://localhost:9191/railway/user/reset-password?token=" + token
+        String resetLink = "http://localhost:3000/reset-new-password?token=" + token
                 + "&newPassword=akashgandham";
 
         try {
@@ -84,7 +85,7 @@ public class UserService {
             MimeMessage message = new MimeMessage(sessionsession);
             message.setFrom(new InternetAddress("akash922.g@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse("akashglobalconnection@gmail.com"));
+                    InternetAddress.parse("akash544.g@gmail.com"));
             message.setSubject("Password Reset Request");
             message.setText("To reset your password, click the link below:\n" + resetLink);
 
@@ -108,7 +109,8 @@ public class UserService {
             }
 
             User user = resetToken.getUser();
-            user.setPassword(newPassword);
+            user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+
             // user.setPassword(passwordEncoder.encode(newPassword)); // Use
             // BCryptPasswordEncoder or similar
             userRepository.save(user);

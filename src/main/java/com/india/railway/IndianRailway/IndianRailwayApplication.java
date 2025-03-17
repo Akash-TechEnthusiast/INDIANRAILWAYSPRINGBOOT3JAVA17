@@ -42,7 +42,7 @@ public class IndianRailwayApplication {
 	@Bean
 	public Session MailSenderSession() {
 		final String username = "akash922.g@gmail.com";
-		final String appPassword = "suqwdrmksaalnoac"; // Generated App Password from
+		final String appPassword = "acfgjfvpuygcrisq"; // Generated App Password from
 
 		// Setting up mail server properties
 		Properties props = new Properties();
