@@ -61,7 +61,8 @@ public class SecurityConfig {
                     try {
                         authorizeRequests
                                 .requestMatchers("/", "/authenticate", "/products/suggest",
-                                        "/user/forgot-password", "/user/reset-password", "/rest/api/producer")
+                                        "/user/forgot-password", "/user/reset-password", "/rest/api/producer",
+                                        "/glocud/recordsave")
                                 .permitAll() // Allow
                                 // access
                                 // to
