@@ -61,7 +61,7 @@ public class SecurityConfig {
                     try {
                         authorizeRequests
                                 .requestMatchers("/", "/authenticate", "/products/suggest",
-                                        "/user/forgot-password", "/user/reset-password")
+                                        "/user/forgot-password", "/user/reset-password", "/rest/api/producer")
                                 .permitAll() // Allow
                                 // access
                                 // to
