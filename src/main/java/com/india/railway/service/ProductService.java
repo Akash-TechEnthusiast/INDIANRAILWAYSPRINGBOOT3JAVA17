@@ -11,7 +11,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 
-
 import com.india.railway.elasticrepo.ProductRepository;
 import com.india.railway.model.Product_Elastic;
 
@@ -78,31 +77,30 @@ public class ProductService {
 
     }
 
-        /*
-         * Explanation
-         * 
-         * NativeQuery → Used to build Elasticsearch queries in Spring Data
-         * Elasticsearch.
-         * Query → Represents the search query.
-         * SearchHits → Stores the search results.
-         * QueryBuilders → Helps in constructing Elasticsearch queries.
-         * 
-         * NativeQuery.builder() → Starts building a native Elasticsearch query.
-         * .withQuery(q -> q.matchPhrasePrefix(...))
-         * matchPhrasePrefix → Searches for words starting with the given prefix.
-         * field("suggestions") → Searches in the suggestions field.
-         * query(prefix) → Uses the user's input to find matching suggestions.
-         * .build() → Finalizes and creates the query.
-         * 
-         * 
-         * 
-         * 
-         * 
-         * Creates a list to store suggestions.
-         * Iterates through search results (searchHits).
-         * Extracts the suggestions field from each product.
-         * Adds them to the list.
-         */
+    /*
+     * Explanation
+     * 
+     * NativeQuery → Used to build Elasticsearch queries in Spring Data
+     * Elasticsearch.
+     * Query → Represents the search query.
+     * SearchHits → Stores the search results.
+     * QueryBuilders → Helps in constructing Elasticsearch queries.
+     * 
+     * NativeQuery.builder() → Starts building a native Elasticsearch query.
+     * .withQuery(q -> q.matchPhrasePrefix(...))
+     * matchPhrasePrefix → Searches for words starting with the given prefix.
+     * field("suggestions") → Searches in the suggestions field.
+     * query(prefix) → Uses the user's input to find matching suggestions.
+     * .build() → Finalizes and creates the query.
+     * 
+     * 
+     * 
+     * 
+     * 
+     * Creates a list to store suggestions.
+     * Iterates through search results (searchHits).
+     * Extracts the suggestions field from each product.
+     * Adds them to the list.
+     */
 
-  
 }

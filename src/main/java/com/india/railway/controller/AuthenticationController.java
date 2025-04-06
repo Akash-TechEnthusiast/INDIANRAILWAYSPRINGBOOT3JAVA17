@@ -33,7 +33,7 @@ public class AuthenticationController {
         authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
         final User userDetails = userRepository.findByUsername(
                 jwtRequest.getUsername());
-            
+
         log.info("Received Request at authenticaton controller");
         final String jwt = jwtUtil.generateToken(userDetails.getUsername(), userDetails.getRoles());
 
