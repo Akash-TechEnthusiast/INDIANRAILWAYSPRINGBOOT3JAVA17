@@ -22,10 +22,10 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository userRepository;
+    private JwtUtils jwtUtil;
 
     @Autowired
-    private JwtUtils jwtUtil;
+    private UserRepository userRepository;
 
     @PostMapping("/authenticate")
     public JwtResponse createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
@@ -50,7 +50,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasRole('USER')") // TEST (it should be added as ROLE_USER in spring context)
+    @PreAuthorize("hasRole('USER')") // TEST (it should be added as ROLE_USER in
+    // spring context)
     public String register(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         // user.setPassword("test");
@@ -58,7 +59,7 @@ public class AuthenticationController {
         user.setMobileno(user.getMobileno());
         // save the user to the database
         // ...
-        userRepository.save(user);
+        User usera = userRepository.save(user);
         return "User registered successfully";
     }
 }

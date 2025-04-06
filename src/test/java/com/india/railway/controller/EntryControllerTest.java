@@ -1,19 +1,18 @@
 package com.india.railway.controller;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.web.servlet.MockMvc;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.india.railway.authservice.JwtUtils;
 import com.india.railway.model.User;
+import com.india.railway.repository.UserRepository;
 import com.india.railway.service.UserServiceTestImpl;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -22,14 +21,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@SpringBootTest(properties = "spring.profiles.active=test")
-@AutoConfigureMockMvc
 // @WebMvcTest(EntryController.class) // ✅ Loads only the controller, NOT the
-// entire Spring context
+// entire Spring context // (properties = "spring.profiles.active=test")
+@SpringBootTest // ✅ Loads entire Spring context
+@AutoConfigureMockMvc
 class EntryControllerTest {
 
         @Autowired
@@ -38,8 +36,41 @@ class EntryControllerTest {
         @MockBean
         private UserServiceTestImpl userService; // Mocking the service layer
 
+        @MockBean
+        private UserRepository userRepository;
+
+        @MockBean
+        private AuthenticationManager authenticationManager;
+
+        @MockBean
+        private JwtUtils jwtUtil;
+
         @Autowired
         private ObjectMapper objectMapper; // Converts Java object to JSON
+
+        @Test
+        public void testCreateUserTest() throws Exception {
+                // Arrange
+                User inputUser = new User();
+                inputUser.setUsername("Alice");
+                inputUser.setEmail("alice@example.com");
+
+                User savedUser = new User();
+                savedUser.setId(1L);
+                savedUser.setUsername("Alice");
+                savedUser.setEmail("alice@example.com");
+
+                when(userService.saveUsertest(any(User.class))).thenReturn(savedUser);
+
+                // Act & Assert
+                mockMvc.perform(post("/userstest/save1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(inputUser)))
+                                .andExpect(status().isCreated())
+                                .andExpect(jsonPath("$.id").value(1L))
+                                .andExpect(jsonPath("$.username").value("Alice"))
+                                .andExpect(jsonPath("$.email").value("alice@example.com"));
+        }
 
         @Test
         public void testGetAllUsers() throws Exception {
@@ -84,30 +115,6 @@ class EntryControllerTest {
                                 .file(mockFile))
                                 .andExpect(status().isOk())
                                 .andExpect(content().string("File uploaded: test.txt"));
-        }
-
-        @Test
-        public void testCreateUserTest() throws Exception {
-                // Arrange
-                User inputUser = new User();
-                inputUser.setUsername("Alice");
-                inputUser.setEmail("alice@example.com");
-
-                User savedUser = new User();
-                savedUser.setId(1L);
-                savedUser.setUsername("Alice");
-                savedUser.setEmail("alice@example.com");
-
-                when(userService.saveUsertest(any(User.class))).thenReturn(savedUser);
-
-                // Act & Assert
-                mockMvc.perform(post("/userstest/save1")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(inputUser)))
-                                .andExpect(status().isCreated())
-                                .andExpect(jsonPath("$.id").value(1L))
-                                .andExpect(jsonPath("$.username").value("Alice"))
-                                .andExpect(jsonPath("$.email").value("alice@example.com"));
         }
 
         @Test

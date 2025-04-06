@@ -1,7 +1,5 @@
 package com.india.railway.controller;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +23,12 @@ public class EntryController {
     @Autowired
     private UserServiceTestImpl userService;
 
+    @PostMapping("/save1")
+    public ResponseEntity<User> createUserTest(@RequestBody User user) {
+        User savedUser = userService.saveUsertest(user);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
     @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -35,12 +39,6 @@ public class EntryController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
-    }
-
-    @PostMapping("/save1")
-    public ResponseEntity<User> createUserTest(@RequestBody User user) {
-        User savedUser = userService.saveUsertest(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @PostMapping("/upload")

@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     try {
                         authorizeRequests
-                                .requestMatchers("/", "/authenticate", "/products/suggest",
+                                .requestMatchers("/", "/authenticate", "/register", "/products/suggest",
                                         "/user/forgot-password", "/user/reset-password", "/rest/api/producer",
                                         "/userstest/**", "/glocud/recordsave")
                                 .permitAll() // Allow
