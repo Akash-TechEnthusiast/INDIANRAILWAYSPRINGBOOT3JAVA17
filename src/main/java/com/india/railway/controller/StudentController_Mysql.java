@@ -35,10 +35,12 @@ public class StudentController_Mysql {
 
     @GetMapping("/fetch_all_students")
     public List<Map<String, Object>> getStudentDropdown() {
+
+        // List<Student_Mysql> stulist = studentservice_mysql.getAllStudent();
         return studentservice_mysql.getAllStudent().stream().map(student -> {
             Map<String, Object> map = new HashMap<>();
             // map.put("id", student.getId());
-            map.put("name", student.getName());
+            map.put("name", student.getCountry());
             return map;
         }).collect(Collectors.toList());
     }

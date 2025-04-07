@@ -22,7 +22,14 @@ public class Student_Mysql {
     private String dob;
     private boolean agreeTerms;
     private boolean notifications;
+
     private String country;
+
+    public Student_Mysql(Long id, int age, String country) {
+        this.id = id;
+        this.age = age;
+        this.country = country;
+    }
 
     /*
      * @PostMapping
@@ -31,6 +38,10 @@ public class Student_Mysql {
      * return "Student_Mysql data received successfully!";
      * }
      */
+
+    public Student_Mysql() {
+        // TODO Auto-generated constructor stub
+    }
 
     // Getters and Setters
     public String getName() {
