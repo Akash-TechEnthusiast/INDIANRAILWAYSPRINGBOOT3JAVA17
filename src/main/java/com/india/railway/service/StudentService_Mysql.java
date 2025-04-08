@@ -28,7 +28,7 @@ public class StudentService_Mysql {
         return studentRepository.save(student);
     }
 
-    public Student_Mysql updateStuent(Long id, Student_Mysql updateStuent) {
+    public Student_Mysql updateStudent(Long id, Student_Mysql updateStuent) {
         return studentRepository.findById(id)
                 .map(student -> {
                     student.setName(updateStuent.getName());

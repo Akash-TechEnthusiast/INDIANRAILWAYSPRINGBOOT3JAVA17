@@ -54,12 +54,12 @@ public class StudentController_Mysql {
 
     @PutMapping("/{id}")
     public Student_Mysql updateStudent(@PathVariable Long id, @RequestBody Student_Mysql student) {
-        return studentservice_mysql.updateStuent(id, student);
+        return studentservice_mysql.updateStudent(id, student);
     }
 
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable Long id) {
         studentservice_mysql.deleteStudent(id);
-        return "Customer deleted successfully!";
+        return "Student deleted successfully!";
     }
 }

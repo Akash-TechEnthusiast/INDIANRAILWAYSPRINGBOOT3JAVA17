@@ -6,26 +6,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.india.railway.authservice.JwtUtils;
 import com.india.railway.model.Student_Mysql;
-import com.india.railway.model.User;
-import com.india.railway.repository.UserRepository;
 import com.india.railway.service.StudentService_Mysql;
-import com.india.railway.service.UserServiceTestImpl;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -83,6 +78,46 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].name").value("india"))
                 .andExpect(jsonPath("$[1].name").value("pakistan"));
+    }
+
+    @Test
+    void testUpdateStudent() throws Exception {
+        // Given
+        Long userId = 1L;
+
+        Student_Mysql inputStudent = new Student_Mysql();
+
+        inputStudent.setAge(0);
+        inputStudent.setCountry("india");
+
+        Student_Mysql returnStudent = new Student_Mysql();
+
+        returnStudent.setAge(10);
+        returnStudent.setCountry("USA");
+
+        when(userService_mysql.updateStudent(eq(userId), any(Student_Mysql.class))).thenReturn(returnStudent);
+
+        // When & Then
+        mockMvc.perform(put("/api/student/{id}", userId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(inputStudent)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.age").value(10))
+                .andExpect(jsonPath("$.country").value("USA"));
+    }
+
+    @Test
+    void testDeleteStudent() throws Exception {
+
+        Long studentId = 1L;
+
+        // Mocking the void method
+        doNothing().when(userService_mysql).deleteStudent(studentId);
+
+        mockMvc.perform(delete("/api/student/{id}", studentId))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Student deleted successfully!"));
+
     }
 
 }
