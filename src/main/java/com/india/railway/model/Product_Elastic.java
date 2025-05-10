@@ -16,7 +16,7 @@ import java.util.Date;
 @Document(indexName = "newproduct")
 public class Product_Elastic {
     @Id
-    private String id;
+    private Long id;
 
     @Field(type = FieldType.Text)
     private String name;
@@ -40,7 +40,7 @@ public class Product_Elastic {
     public Product_Elastic() {
     }
 
-    public Product_Elastic(String id, String name, String description, Double price, Boolean available, Date createdAt,
+    public Product_Elastic(Long id, String name, String description, Double price, Boolean available, Date createdAt,
             List<String> suggestions) {
         this.id = id;
         this.name = name;
@@ -53,7 +53,7 @@ public class Product_Elastic {
 
     // Getters and Setters
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,7 +77,7 @@ public class Product_Elastic {
         this.createdAt = createdAt;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

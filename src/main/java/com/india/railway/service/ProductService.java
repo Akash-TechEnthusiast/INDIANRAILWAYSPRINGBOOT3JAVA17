@@ -11,8 +11,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 
-import com.india.railway.elasticrepo.ProductRepository;
 import com.india.railway.model.Product_Elastic;
+import com.india.railway.repository.elastic.ProductRepository;
 
 import java.util.List;
 

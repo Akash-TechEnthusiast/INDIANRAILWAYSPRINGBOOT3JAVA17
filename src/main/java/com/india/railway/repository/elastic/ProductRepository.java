@@ -1,4 +1,4 @@
-package com.india.railway.elasticrepo;
+package com.india.railway.repository.elastic;
 
 import java.util.List;
 

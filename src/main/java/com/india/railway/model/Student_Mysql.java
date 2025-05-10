@@ -17,6 +17,13 @@ public class Student_Mysql {
     private String name;
     private String email;
     private String password;
+    private String gender;
+    private int age;
+    private String dob;
+    private boolean agreeTerms;
+    private boolean notifications;
+
+    private String country;
 
     public Long getId() {
         return id;
@@ -25,14 +32,6 @@ public class Student_Mysql {
     public void setId(Long id) {
         this.id = id;
     }
-
-    private String gender;
-    private int age;
-    private String dob;
-    private boolean agreeTerms;
-    private boolean notifications;
-
-    private String country;
 
     public Student_Mysql(Long id, int age, String country) {
         this.id = id;

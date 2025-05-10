@@ -27,7 +27,13 @@ cd /home/akash/Documents/kafka_2.13-3.7.0
 bin/kafka-server-start.sh config/server.properties
 
 
+==================== How to start Kibana =========================
 
+cd /home/akash/Downloads/kibana-7.17.27-linux-x86_64/bin
+
+./kibana
+
+===================================================================
 
 
 

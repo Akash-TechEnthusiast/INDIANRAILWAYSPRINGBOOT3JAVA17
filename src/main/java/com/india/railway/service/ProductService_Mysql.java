@@ -2,8 +2,12 @@ package com.india.railway.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.india.railway.model.Product_Elastic;
 import com.india.railway.model.Product_Mysql;
 import com.india.railway.repository.ProductRepository_Mysql;
+import com.india.railway.repository.elastic.ProductRepository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,9 +17,18 @@ public class ProductService_Mysql {
     @Autowired
     private ProductRepository_Mysql productRepository_mysql;
 
+    @Autowired
+    ProductRepository productRepository;
+
     // Create a new product
     public Product_Mysql saveProduct(Product_Mysql product) {
-        return productRepository_mysql.save(product);
+        Product_Mysql ps = productRepository_mysql.save(product);
+        Product_Elastic test = new Product_Elastic();
+        test.setId(ps.getId());
+        test.setName(ps.getName());
+        test.setDescription(ps.getDescription());
+        productRepository.save(test);
+        return ps;
     }
 
     // Get all products
