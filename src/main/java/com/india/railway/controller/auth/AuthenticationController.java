@@ -1,4 +1,4 @@
-package com.india.railway.controller;
+package com.india.railway.controller.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
