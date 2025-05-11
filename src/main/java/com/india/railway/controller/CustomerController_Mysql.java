@@ -3,8 +3,8 @@ package com.india.railway.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.india.railway.model.Customer_Mysql;
-import com.india.railway.service.CustomerService_Mysql;
+import com.india.railway.model.mysql.Customer_Mysql;
+import com.india.railway.service.mysql.CustomerService_Mysql;
 
 import java.util.HashMap;
 import java.util.List;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.india.railway.model.Customer_Redis;
-import com.india.railway.service.Customer_Redis_Service;
+import com.india.railway.service.redis.Customer_Redis_Service;
 
 @RequestMapping(path = "/customer")
 @RestController

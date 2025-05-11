@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import com.india.railway.authservice.JwtRequest;
 import com.india.railway.authservice.JwtResponse;
 import com.india.railway.authservice.JwtUtils;
-import com.india.railway.model.User;
-import com.india.railway.repository.UserRepository;
+import com.india.railway.model.mysql.User;
+import com.india.railway.repository.mysql.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

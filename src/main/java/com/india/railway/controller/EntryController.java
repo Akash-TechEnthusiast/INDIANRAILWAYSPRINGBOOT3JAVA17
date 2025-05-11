@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.india.railway.model.User;
-import com.india.railway.service.UserServiceTestImpl;
+import com.india.railway.model.mysql.User;
+import com.india.railway.service.mysql.UserServiceTestImpl;
 
 @RestController
 @RequestMapping("/userstest")

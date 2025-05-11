@@ -37,13 +37,13 @@ http://localhost:5601/
 
 click on left 3 horizontal arrows 
 
-discover 
+discover  -> to see the data 
 
 or 
 
-Devtools   -> Query Management
+Devtools   -> Query Management (sql query editor)
 
-StockManagement
+
 
 
 

@@ -19,9 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.india.railway.repository")
-@EnableMongoRepositories(basePackages = "com.india.railway.repository")
-@EnableRedisRepositories(basePackages = "com.india.railway.repository")
+@EnableJpaRepositories(basePackages = "com.india.railway.repository.mysql")
+@EnableMongoRepositories(basePackages = "com.india.railway.repository.mongodb")
+@EnableRedisRepositories(basePackages = "com.india.railway.repository.redis")
 @ComponentScan(basePackages = { "com.india.railway" })
 @EntityScan(basePackages = "com.india.railway.model")
 

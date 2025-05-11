@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.india.railway.model.CardSelectionRequest;
-import com.india.railway.model.Product_Mysql;
-import com.india.railway.service.ProductService_Mysql;
+import com.india.railway.model.mysql.CardSelectionRequest;
+import com.india.railway.model.mysql.Product_Mysql;
+import com.india.railway.service.mysql.ProductService_Mysql;
 
 import jakarta.validation.Valid;
 

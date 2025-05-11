@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.india.railway.model.Employee;
-import com.india.railway.service.EmployeeServiceImpl;
+import com.india.railway.model.mysql.Employee;
+import com.india.railway.service.mysql.EmployeeServiceImpl;
 
 @RequestMapping(path = "/employee")
 @RestController

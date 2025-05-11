@@ -21,9 +21,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
-import com.india.railway.model.Student_Mysql;
-import com.india.railway.model.User;
-import com.india.railway.service.StudentService_Mysql;
+import com.india.railway.model.mysql.Student_Mysql;
+import com.india.railway.model.mysql.User;
+import com.india.railway.repository.mysql.Student_Repo_Mysql;
+import com.india.railway.service.mysql.StudentService_Mysql;
 
 //@DataJpaTest
 @SpringBootTest

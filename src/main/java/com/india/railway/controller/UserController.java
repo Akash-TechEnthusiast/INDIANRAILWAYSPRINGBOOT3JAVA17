@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.india.railway.model.User;
-import com.india.railway.model.UserProfile;
-import com.india.railway.service.UserService;
-import com.india.railway.model.ResetPasswordRequest;
+
+import com.india.railway.model.mysql.ResetPasswordRequest;
+import com.india.railway.model.mysql.User;
+import com.india.railway.model.mysql.UserProfile;
+import com.india.railway.service.mysql.UserService;
 
 import reactor.core.publisher.Flux;
 

@@ -8,8 +8,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.india.railway.model.Student_Mysql;
-import com.india.railway.service.StudentService_Mysql;
+import com.india.railway.model.mysql.Student_Mysql;
+import com.india.railway.service.mysql.StudentService_Mysql;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;

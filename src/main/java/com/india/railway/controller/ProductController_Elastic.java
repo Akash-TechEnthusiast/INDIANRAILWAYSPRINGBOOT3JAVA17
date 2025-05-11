@@ -3,8 +3,8 @@ package com.india.railway.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.india.railway.model.Product_Elastic;
-import com.india.railway.service.ProductService;
+import com.india.railway.model.elastic.Product_Elastic;
+import com.india.railway.service.elastic.ProductService;
 
 import java.util.List;
 

@@ -10,9 +10,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.india.railway.authservice.JwtUtils;
-import com.india.railway.model.User;
-import com.india.railway.repository.UserRepository;
-import com.india.railway.service.UserServiceTestImpl;
+import com.india.railway.model.mysql.User;
+import com.india.railway.repository.mysql.UserRepository;
+import com.india.railway.service.mysql.UserServiceTestImpl;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

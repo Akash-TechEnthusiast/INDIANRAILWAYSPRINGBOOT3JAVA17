@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import com.india.railway.model.Role;
+import com.india.railway.model.mysql.Role;
+
 import java.security.Key;
 
 @Component
