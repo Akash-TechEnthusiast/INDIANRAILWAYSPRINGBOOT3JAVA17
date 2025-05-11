@@ -63,7 +63,8 @@ public class SecurityConfig {
                                 .requestMatchers("/", "/authenticate", "/register", "/products/suggest",
                                         "/user/forgot-password", "/user/reset-password", "/rest/api/producer",
                                         "/products",
-                                        "/userstest/**", "/glocud/recordsave", "/api/student/**")
+                                        "/userstest/**", "/glocud/recordsave", "/api/student/**",
+                                        "/products_elastic/**", "/products_elastic/fuzzymatchallfields")
                                 .permitAll() // Allow
                                 // access
                                 // to

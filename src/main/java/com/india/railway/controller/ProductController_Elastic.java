@@ -15,10 +15,12 @@ public class ProductController_Elastic {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
-    public Product_Elastic createProduct(@RequestBody Product_Elastic product) {
-        return productService.saveProduct(product);
-    }
+    /*
+     * @PostMapping
+     * public Product_Elastic createProduct(@RequestBody Product_Elastic product) {
+     * return productService.saveProduct(product);
+     * }
+     */
 
     @GetMapping
     public Iterable<Product_Elastic> getAllProducts() {
@@ -39,6 +41,18 @@ public class ProductController_Elastic {
     @GetMapping("/suggest")
     public List<String> getSuggestions(@RequestParam String query) {
         return productService.getAutoSuggestionsOnName(query);
+    }
+
+    @GetMapping("/fuzzysearch")
+    public List<Product_Elastic> fuzzySearchByNameAndPrice(@RequestParam String name) {
+        return productService.fuzzySearchByMultipleNames(name, name);
+
+    }
+
+    @GetMapping("/fuzzymatchallfields")
+    public List<Product_Elastic> fuzzyMultiFieldSearch(@RequestParam String name) {
+        return productService.fuzzyMultiFieldSearch(name, name);
+
     }
 
 }

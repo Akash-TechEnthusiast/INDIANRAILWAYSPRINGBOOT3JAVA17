@@ -33,8 +33,24 @@ cd /home/akash/Downloads/kibana-7.17.27-linux-x86_64/bin
 
 ./kibana
 
+http://localhost:5601/
+
+click on left 3 horizontal arrows 
+
+discover 
+
+or 
+
+Devtools   -> Query Management
+
+StockManagement
+
+
+
 ===================================================================
 
+
+Tasks
 
 
 
