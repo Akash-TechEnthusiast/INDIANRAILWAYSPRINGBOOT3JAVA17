@@ -1,37 +1,23 @@
 package com.india.railway.service.elastic;
 
 import java.util.ArrayList;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.stereotype.Service;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
-
 import com.india.railway.model.elastic.Product_Elastic;
-import com.india.railway.repository.elastic.ProductRepository;
-
-import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import com.india.railway.repository.elastic.ElasticProductRepository;
 import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.MultiMatchQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
-
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
-import co.elastic.clients.elasticsearch.core.search.Hit;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
 
         @Autowired
-        ProductRepository productRepository;
+        ElasticProductRepository elasticproductRepository;
 
         @Autowired
         private ElasticsearchOperations elasticsearchOperations;
@@ -82,15 +68,15 @@ public class ProductService {
         }
 
         public Iterable<Product_Elastic> getAllProducts() {
-                return productRepository.findAll();
+                return elasticproductRepository.findAll();
         }
 
         public List<Product_Elastic> searchProductsByName(String name) {
-                return productRepository.findByName(name);
+                return elasticproductRepository.findByName(name);
         }
 
         public void deleteAll() {
-                productRepository.deleteAll();
+                elasticproductRepository.deleteAll();
         }
 
         public List<String> getAutoSuggestionsOnName(String prefix) {

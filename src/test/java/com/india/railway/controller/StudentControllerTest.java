@@ -77,8 +77,8 @@ class StudentControllerTest {
         mockMvc.perform(get("/api/student/fetch_all_students"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].name").value("india"))
-                .andExpect(jsonPath("$[1].name").value("pakistan"));
+                .andExpect(jsonPath("$[0].country").value("india"))
+                .andExpect(jsonPath("$[1].country").value("pakistan"));
     }
 
     @Test
@@ -99,7 +99,7 @@ class StudentControllerTest {
         when(userService_mysql.updateStudent(eq(userId), any(Student_Mysql.class))).thenReturn(returnStudent);
 
         // When & Then
-        mockMvc.perform(put("/api/student/{id}", userId)
+        mockMvc.perform(put("/api/student/updateStudent/{id}", userId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inputStudent)))
                 .andExpect(status().isOk())
@@ -115,7 +115,7 @@ class StudentControllerTest {
         // Mocking the void method
         doNothing().when(userService_mysql).deleteStudent(studentId);
 
-        mockMvc.perform(delete("/api/student/{id}", studentId))
+        mockMvc.perform(delete("/api/student/deteleStudent/{id}", studentId))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Student deleted successfully!"));
 

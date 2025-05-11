@@ -25,15 +25,29 @@ public class StudentController_Mysql {
         return studentservice_mysql.addStudent(student);
     }
 
-    /*
-     * public List<Customer_Mysql> getAllCustomers() {
-     * return customerService.getAllCustomers();
-     * 
-     * }
-     * 
-     */
-
     @GetMapping("/fetch_all_students")
+    public List<Student_Mysql> getAllStudent() {
+        return studentservice_mysql.getAllStudent();
+
+    }
+
+    @GetMapping("getStudenById/{id}")
+    public Optional<Student_Mysql> getStudentById(@PathVariable Long id) {
+        return studentservice_mysql.getStudentById(id);
+    }
+
+    @PutMapping("updateStudent/{id}")
+    public Student_Mysql updateStudent(@PathVariable Long id, @RequestBody Student_Mysql student) {
+        return studentservice_mysql.updateStudent(id, student);
+    }
+
+    @DeleteMapping("deteleStudent/{id}")
+    public String deleteStudent(@PathVariable Long id) {
+        studentservice_mysql.deleteStudent(id);
+        return "Student deleted successfully!";
+    }
+
+    @GetMapping("/fetch_country_for_student")
     public List<Map<String, Object>> getStudentDropdown() {
 
         // List<Student_Mysql> stulist = studentservice_mysql.getAllStudent();
@@ -45,21 +59,4 @@ public class StudentController_Mysql {
         }).collect(Collectors.toList());
     }
 
-    /*
-     * @GetMapping("/{id}")
-     * public Optional<Customer_Mysql> getCustomerById(@PathVariable Long id) {
-     * return customerService.getCustomerById(id);
-     * }
-     */
-
-    @PutMapping("/{id}")
-    public Student_Mysql updateStudent(@PathVariable Long id, @RequestBody Student_Mysql student) {
-        return studentservice_mysql.updateStudent(id, student);
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable Long id) {
-        studentservice_mysql.deleteStudent(id);
-        return "Student deleted successfully!";
-    }
 }

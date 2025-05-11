@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.india.railway.model.elastic.Product_Elastic;
 
 @Repository
-public interface ProductRepository extends ElasticsearchRepository<Product_Elastic, Long> {
+public interface ElasticProductRepository extends ElasticsearchRepository<Product_Elastic, Long> {
     // Custom query methods
     List<Product_Elastic> findByName(String name);
 }

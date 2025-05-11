@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.india.railway.model.elastic.Product_Elastic;
 import com.india.railway.model.mysql.Product_Mysql;
-import com.india.railway.repository.elastic.ProductRepository;
+import com.india.railway.repository.elastic.ElasticProductRepository;
+
 import com.india.railway.repository.mysql.ProductRepository_Mysql;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ProductService_Mysql {
     private ProductRepository_Mysql productRepository_mysql;
 
     @Autowired
-    ProductRepository productRepository;
+    ElasticProductRepository elasticproductRepository;
 
     // Create a new product
     public Product_Mysql saveProduct(Product_Mysql product) {
@@ -27,7 +28,7 @@ public class ProductService_Mysql {
         test.setId(ps.getId());
         test.setName(ps.getName());
         test.setDescription(ps.getDescription());
-        productRepository.save(test);
+        elasticproductRepository.save(test);
         return ps;
     }
 
