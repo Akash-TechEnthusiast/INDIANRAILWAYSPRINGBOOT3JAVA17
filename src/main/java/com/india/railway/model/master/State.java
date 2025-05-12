@@ -14,6 +14,7 @@ public class State {
     private String code;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
     // 👇 Many states belong to one country

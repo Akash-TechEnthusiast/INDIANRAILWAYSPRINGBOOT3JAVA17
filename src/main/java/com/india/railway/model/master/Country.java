@@ -1,10 +1,12 @@
 package com.india.railway.model.master;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.india.railway.model.mysql.Auditable;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,18 +28,16 @@ public class Country {
     private String name;
     private String code;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "country_state", joinColumns = @JoinColumn(name = "country_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "state_id", referencedColumnName = "id"))
+    @Column(name = "created_date")
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
-    private List<State> state;
-
-    public List<State> getState() {
-        return state;
+    @PreUpdate
+    public void setLastUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 
-    public void setState(List<State> state) {
-        this.state = state;
-    }
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<State> states;
 
     // Default constructor
     public Country() {
