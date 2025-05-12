@@ -1,12 +1,10 @@
 package com.india.railway.model.master;
 
-import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "state")
-public class State {
+@Table(name = "district")
+public class District {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,22 +14,19 @@ public class State {
     private String code;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
-
-    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<District> district;
+    @JoinColumn(name = "state_id", nullable = false)
+    private State state;
 
     // 👇 Many states belong to one country
 
     // Constructors
-    public State() {
+    public District() {
     }
 
-    public State(String name, String code, Country country) {
+    public District(String name, String code, State state) {
         this.name = name;
         this.code = code;
-        this.country = country;
+        this.state = state;
     }
 
     // Getters and setters
@@ -47,8 +42,8 @@ public class State {
         return code;
     }
 
-    public Country getCountry() {
-        return country;
+    public State getState() {
+        return state;
     }
 
     public void setId(Long id) {
@@ -63,7 +58,7 @@ public class State {
         this.code = code;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setState(State state) {
+        this.state = state;
     }
 }
