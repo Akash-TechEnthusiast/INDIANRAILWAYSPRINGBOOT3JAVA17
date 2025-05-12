@@ -43,7 +43,7 @@ public class CountryController {
                 .map(country -> {
                     country.setName(updatedCountry.getName());
                     country.setCode(updatedCountry.getCode());
-                    // country.setState(updatedCountry.getState());
+                    country.setState(updatedCountry.getState());
                     return ResponseEntity.ok(countryRepository.save(country));
                 })
                 .orElse(ResponseEntity.notFound().build());
