@@ -1,4 +1,4 @@
-package com.india.railway.controller;
+package com.india.railway.controller.user;
 
 import java.util.Map;
 
