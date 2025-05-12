@@ -1,7 +1,5 @@
 package com.india.railway.model.master;
 
-import com.india.railway.model.mysql.Passenger;
-
 import jakarta.persistence.*;
 
 @Entity

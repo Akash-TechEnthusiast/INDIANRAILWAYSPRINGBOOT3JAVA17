@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "country")
-public class Country extends Auditable {
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,14 @@ public class Country extends Auditable {
     @JoinTable(name = "country_state", joinColumns = @JoinColumn(name = "country_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "state_id", referencedColumnName = "id"))
 
     private List<State> state;
+
+    public List<State> getState() {
+        return state;
+    }
+
+    public void setState(List<State> state) {
+        this.state = state;
+    }
 
     // Default constructor
     public Country() {

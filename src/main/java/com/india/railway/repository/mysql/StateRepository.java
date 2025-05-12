@@ -3,8 +3,8 @@ package com.india.railway.repository.mysql;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.india.railway.model.master.Country;
+import com.india.railway.model.master.State;
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country, Long> {
+public interface StateRepository extends JpaRepository<State, Long> {
 }
