@@ -21,6 +21,12 @@ public class DistrictController {
     @Autowired
     private StateRepository stateRepository;
 
+    @GetMapping("/state/{stateId}")
+    public ResponseEntity<List<District>> getDistrictsByStateId(@PathVariable Long stateId) {
+        List<District> districts = districtRepository.findByStateId(stateId);
+        return ResponseEntity.ok(districts);
+    }
+
     // Get all districts
     @GetMapping
     public List<District> getAllDistricts() {

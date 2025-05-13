@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.india.railway.model.master.Country;
+import com.india.railway.model.master.District;
 import com.india.railway.model.master.State;
 import com.india.railway.repository.mysql.CountryRepository;
 import com.india.railway.repository.mysql.StateRepository;
@@ -25,6 +26,12 @@ public class StateController {
     @GetMapping
     public List<State> getAllStates() {
         return stateRepository.findAll();
+    }
+
+    @GetMapping("/country/{countryId}")
+    public ResponseEntity<List<State>> getDistrictsByStateId(@PathVariable Long countryId) {
+        List<State> stateList = stateRepository.findByCountryId(countryId);
+        return ResponseEntity.ok(stateList);
     }
 
     @GetMapping("/{id}")
