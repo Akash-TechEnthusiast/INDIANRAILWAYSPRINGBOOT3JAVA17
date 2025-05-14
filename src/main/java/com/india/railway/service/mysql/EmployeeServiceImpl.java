@@ -1,5 +1,7 @@
 package com.india.railway.service.mysql;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.india.railway.exception.EmployeeAlreadyExistsException;
 import com.india.railway.exception.NoSuchEmployeeExistsException;
 import com.india.railway.model.mysql.Employee;
+import com.india.railway.model.mysql.EmployeeTreeDTO;
 import com.india.railway.repository.mysql.EmployeRepository;
+import java.util.Set;
 
 @Service
 public class EmployeeServiceImpl implements EmployeService {
@@ -21,6 +25,35 @@ public class EmployeeServiceImpl implements EmployeService {
 	public Employee getEmployee(Long id) {
 		return empRespository.findById(id)
 				.orElseThrow(() -> new NoSuchEmployeeExistsException("NO EMPLOYEE PRESENT WITH ID = " + id));
+	}
+
+	public List<EmployeeTreeDTO> getCategoryTree() {
+		List<Employee> roots = empRespository.findByManagerIsNull();
+		List<EmployeeTreeDTO> tree = new ArrayList<>();
+
+		for (Employee root : roots) {
+			EmployeeTreeDTO dto = new EmployeeTreeDTO(root);
+			tree.add(dto);
+		}
+
+		return tree;
+	}
+
+	public Employee getEmployeeTreeFromRoot(Long rootId) {
+		Employee root = empRespository.findById(rootId)
+				.orElseThrow(() -> new RuntimeException("Root not found"));
+		populateSubordinates(root);
+		return root;
+	}
+
+	private void populateSubordinates(Employee manager) {
+		List<Employee> subs = empRespository.findByManagerId(manager.getId());
+		Set<Employee> set = new HashSet<>(subs);
+		manager.setSubordinates(set); // important to set it!
+
+		for (Employee sub : subs) {
+			populateSubordinates(sub); // recursive call
+		}
 	}
 
 	// Method to add new customer details to database.Throws

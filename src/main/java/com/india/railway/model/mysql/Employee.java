@@ -1,7 +1,11 @@
 package com.india.railway.model.mysql;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,6 +26,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "employee")
 public class Employee {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private String address;
+	private String qualification;
+	private String gender;
+	private String dateofbirth;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "manager_id")
+	private Employee manager;
+
+	// Self-referencing relationship: an employee can have many subordinates
+	@OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Employee> subordinates = new HashSet<>();
 
 	public String getQualification() {
 		return qualification;
@@ -63,23 +84,6 @@ public class Employee {
 		this.subordinates = subordinates;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String name;
-	private String address;
-	private String qualification;
-	private String gender;
-	private String dateofbirth;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "manager_id")
-	private Employee manager;
-
-	// Self-referencing relationship: an employee can have many subordinates
-	@OneToMany(mappedBy = "manager", cascade = CascadeType.ALL)
-	private Set<Employee> subordinates = new HashSet<>();
-
 	public Long getId() {
 		return id;
 	}
@@ -106,75 +110,25 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", address=" + address + ", qualification=" + qualification
-				+ ", gender=" + gender + ", dateofbirth=" + dateofbirth + ", manager=" + manager + ", subordinates="
-				+ subordinates + "]";
+		return "Employee [id=" + id + ", name=" + name + ", address=" + address +
+				", qualification=" + qualification + ", gender=" + gender +
+				", dateofbirth=" + dateofbirth +
+				", managerId=" + (manager != null ? manager.getId() : null) +
+				", subordinateCount=" + (subordinates != null ? subordinates.size() : 0) + "]";
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
+	public boolean equals(Object o) {
+		if (this == o)
 			return true;
-		if (obj == null)
+		if (!(o instanceof Employee))
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (qualification == null) {
-			if (other.qualification != null)
-				return false;
-		} else if (!qualification.equals(other.qualification))
-			return false;
-		if (gender == null) {
-			if (other.gender != null)
-				return false;
-		} else if (!gender.equals(other.gender))
-			return false;
-		if (dateofbirth == null) {
-			if (other.dateofbirth != null)
-				return false;
-		} else if (!dateofbirth.equals(other.dateofbirth))
-			return false;
-		if (manager == null) {
-			if (other.manager != null)
-				return false;
-		} else if (!manager.equals(other.manager))
-			return false;
-		if (subordinates == null) {
-			if (other.subordinates != null)
-				return false;
-		} else if (!subordinates.equals(other.subordinates))
-			return false;
-		return true;
+		Employee employee = (Employee) o;
+		return id != null && id.equals(employee.getId());
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((qualification == null) ? 0 : qualification.hashCode());
-		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + ((dateofbirth == null) ? 0 : dateofbirth.hashCode());
-		result = prime * result + ((manager == null) ? 0 : manager.hashCode());
-		result = prime * result + ((subordinates == null) ? 0 : subordinates.hashCode());
-		return result;
+		return Objects.hash(id);
 	}
 }
