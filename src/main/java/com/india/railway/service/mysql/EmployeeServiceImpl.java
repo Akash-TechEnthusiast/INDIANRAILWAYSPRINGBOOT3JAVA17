@@ -1,16 +1,12 @@
 package com.india.railway.service.mysql;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.india.railway.exception.EmployeeAlreadyExistsException;
 import com.india.railway.exception.NoSuchEmployeeExistsException;
 import com.india.railway.model.mysql.Employee;
-import com.india.railway.model.mysql.EmployeeTreeDTO;
 import com.india.railway.repository.mysql.EmployeRepository;
 import java.util.Set;
 
@@ -25,18 +21,6 @@ public class EmployeeServiceImpl implements EmployeService {
 	public Employee getEmployee(Long id) {
 		return empRespository.findById(id)
 				.orElseThrow(() -> new NoSuchEmployeeExistsException("NO EMPLOYEE PRESENT WITH ID = " + id));
-	}
-
-	public List<EmployeeTreeDTO> getCategoryTree() {
-		List<Employee> roots = empRespository.findByManagerIsNull();
-		List<EmployeeTreeDTO> tree = new ArrayList<>();
-
-		for (Employee root : roots) {
-			EmployeeTreeDTO dto = new EmployeeTreeDTO(root);
-			tree.add(dto);
-		}
-
-		return tree;
 	}
 
 	public Employee getEmployeeTreeFromRoot(Long rootId) {

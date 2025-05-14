@@ -34,6 +34,12 @@ public class State {
         this.country = country;
     }
 
+    public State(String code, String name) {
+        this.code = code;
+        this.name = name;
+
+    }
+
     // Getters and setters
     public Long getId() {
         return id;

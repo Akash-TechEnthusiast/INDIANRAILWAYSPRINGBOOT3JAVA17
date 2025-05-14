@@ -9,6 +9,7 @@ import com.india.railway.model.master.State;
 import com.india.railway.repository.mysql.DistrictRepository;
 import com.india.railway.repository.mysql.StateRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,17 @@ public class DistrictController {
     @GetMapping("/state/{stateId}")
     public ResponseEntity<List<District>> getDistrictsByStateId(@PathVariable Long stateId) {
         List<District> districts = districtRepository.findByStateId(stateId);
-        return ResponseEntity.ok(districts);
+
+        List<District> districtslist = new ArrayList<>();
+
+        for (District st : districts) {
+            Long districtid = st.getId();
+            String districtcode = st.getCode();
+            String districtName = st.getName();
+            districtslist.add(new District(districtid, districtcode, districtName));
+        }
+        return ResponseEntity.ok(districtslist);
+
     }
 
     // Get all districts

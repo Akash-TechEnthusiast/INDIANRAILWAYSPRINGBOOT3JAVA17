@@ -29,6 +29,13 @@ public class District {
         this.state = state;
     }
 
+    public District(Long id, String code, String name) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+
+    }
+
     // Getters and setters
     public Long getId() {
         return id;

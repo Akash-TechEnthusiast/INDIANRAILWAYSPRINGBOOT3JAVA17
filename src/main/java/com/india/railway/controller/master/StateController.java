@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import com.india.railway.model.master.Country;
 import com.india.railway.model.master.District;
 import com.india.railway.model.master.State;
+import com.india.railway.model.master.StateDTO;
 import com.india.railway.repository.mysql.CountryRepository;
 import com.india.railway.repository.mysql.StateRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,9 +31,18 @@ public class StateController {
     }
 
     @GetMapping("/country/{countryId}")
-    public ResponseEntity<List<State>> getDistrictsByStateId(@PathVariable Long countryId) {
-        List<State> stateList = stateRepository.findByCountryId(countryId);
-        return ResponseEntity.ok(stateList);
+    public ResponseEntity<List<State>> getStateByCountryId(@PathVariable Long countryId) {
+        // List<State> stateList = stateRepository.findByCountryId(countryId);
+
+        List<State> rawStates = stateRepository.findByCountryId(countryId);
+        List<State> states = new ArrayList<>();
+
+        for (State st : rawStates) {
+            String statecode = st.getCode();
+            String stateName = st.getName();
+            states.add(new State(statecode, stateName));
+        }
+        return ResponseEntity.ok(states);
     }
 
     @GetMapping("/{id}")
