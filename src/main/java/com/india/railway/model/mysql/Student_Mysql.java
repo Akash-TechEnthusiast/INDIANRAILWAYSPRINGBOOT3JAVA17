@@ -39,14 +39,6 @@ public class Student_Mysql {
         this.country = country;
     }
 
-    /*
-     * @PostMapping
-     * public String receiveStudentData(@RequestBody Student_Mysql Person) {
-     * System.out.println("Received Student_Mysql data: " + Person);
-     * return "Student_Mysql data received successfully!";
-     * }
-     */
-
     public Student_Mysql() {
         // TODO Auto-generated constructor stub
     }
