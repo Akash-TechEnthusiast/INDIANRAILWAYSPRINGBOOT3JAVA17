@@ -1,10 +1,14 @@
 package com.india.railway.controller.passenger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.india.railway.model.mysql.Passenger;
 import com.india.railway.model.mysql.Student_Mysql;
+import com.india.railway.model.mysql.Train;
 import com.india.railway.service.mysql.PassengerServiceImpl;
 import com.india.railway.service.mysql.StudentService_Mysql;
 
@@ -38,6 +42,27 @@ public class PassengerController_Mysql {
     @PutMapping("updatePassenger/{id}")
     public String updatePassenger(@RequestBody Passenger passenger) {
         return passengerServiceImpl.updatePassenger(passenger);
+    }
+
+    @GetMapping("/bypagewise")
+    public ResponseEntity<Page<Passenger>> getAllPassengers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy) {
+
+        Page<Passenger> passengers = passengerServiceImpl.getAllPassengers(page, size, sortBy);
+        return ResponseEntity.ok(passengers);
+    }
+
+    @GetMapping("/{passengerId}/trains")
+    public ResponseEntity<Page<Train>> getTrainsByPassengerId(
+            @PathVariable Long passengerId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy) {
+
+        Page<Train> trainsPage = passengerServiceImpl.getTrainsByPassengerId(passengerId, page, size, sortBy);
+        return ResponseEntity.ok(trainsPage);
     }
 
 }

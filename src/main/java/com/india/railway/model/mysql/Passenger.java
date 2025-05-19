@@ -108,7 +108,9 @@ public class Passenger extends Auditable {
 
         // --------------------------------------------------------------------------
 
-        @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+        // @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch =
+        // FetchType.LAZY)
+        @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(name = "passenger_train", // Name of the join table
                         joinColumns = @JoinColumn(name = "passenger_id"), // Column in the join table for Student
                         inverseJoinColumns = @JoinColumn(name = "train_id") // Column in the join table for Course

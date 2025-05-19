@@ -1,6 +1,7 @@
 package com.india.railway.model.mysql;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +35,7 @@ public class Train {
 
     // @ManyToMany(mappedBy = "trains")
     // @NotEmpty(message = "A train must have at least one passenger.")
-    @ManyToMany(mappedBy = "trains")
+    @ManyToMany(mappedBy = "trains", fetch = FetchType.LAZY)
     private Set<Passenger> passengers = new HashSet<>();
 
 }
