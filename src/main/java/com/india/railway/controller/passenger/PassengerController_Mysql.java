@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.india.railway.model.mysql.Address;
 import com.india.railway.model.mysql.Passenger;
 import com.india.railway.model.mysql.Student_Mysql;
 import com.india.railway.model.mysql.Train;
@@ -63,6 +64,17 @@ public class PassengerController_Mysql {
 
         Page<Train> trainsPage = passengerServiceImpl.getTrainsByPassengerId(passengerId, page, size, sortBy);
         return ResponseEntity.ok(trainsPage);
+    }
+
+    @GetMapping("/{passengerId}/address")
+    public ResponseEntity<Page<Address>> getAddressByPassengerId(
+            @PathVariable Long passengerId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy) {
+
+        Page<Address> addressList = passengerServiceImpl.findAddressByPassengerId(passengerId, page, size, sortBy);
+        return ResponseEntity.ok(addressList);
     }
 
 }

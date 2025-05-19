@@ -16,9 +16,11 @@ import com.india.railway.exception.EntityNotFoundException;
 import com.india.railway.exception.NoSuchEmployeeExistsException;
 import com.india.railway.exception.NoSuchPassengerExistsException;
 import com.india.railway.exception.PassengerAlreadyExistsException;
+import com.india.railway.model.mysql.Address;
 import com.india.railway.model.mysql.Passenger;
 import com.india.railway.model.mysql.Train;
 import com.india.railway.model.mysql.TrainNameProjection;
+import com.india.railway.repository.mysql.AddressRepository;
 import com.india.railway.repository.mysql.PassengerRepository;
 import com.india.railway.repository.mysql.TrainRepository;
 
@@ -35,6 +37,9 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Autowired
     TrainRepository trainRepository;
+
+    @Autowired
+    AddressRepository addressRepository;
 
     @Override
     public Optional<Passenger> getPassenger(Long id) {
@@ -120,6 +125,11 @@ public class PassengerServiceImpl implements PassengerService {
     public Page<Train> getTrainsByPassengerId(Long passengerId, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
         return trainRepository.findTrainsListByPassengerId(passengerId, pageable);
+    }
+
+    public Page<Address> findAddressByPassengerId(Long passengerId, int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+        return addressRepository.findAddressListByPassengerId(passengerId, pageable);
     }
 
 }
