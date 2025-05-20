@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -79,7 +79,7 @@
             </p>
         </div>
         <div>
-            <img src="school-logo.png" alt="School Logo">
+            <img src="/images/school-logo.png" alt="School Logo">
         </div>
     </div>
 
@@ -90,9 +90,9 @@
             <strong>Due Date: </strong> 30-May-2025
         </p>
 
-        <p><strong>Student Name:</strong> John Doe<br>
-            <strong>Student ID:</strong> GV12345<br>
-            <strong>Class:</strong> Grade 10
+        <p><strong>Student Name:</strong> <span th:text="${studentName}"></span><br>
+            <strong>Student ID:</strong> <span th:text="${studentId}"></span><br>
+            <strong>Class:</strong> <span th:text="${studentClass}"></span>
         </p>
 
         <table>
@@ -100,21 +100,13 @@
                 <th>Description</th>
                 <th>Amount</th>
             </tr>
-            <tr>
-                <td>Tuition Fee (May)</td>
-                <td>$300.00</td>
-            </tr>
-            <tr>
-                <td>Library Fee</td>
-                <td>$25.00</td>
-            </tr>
-            <tr>
-                <td>Lab Fee</td>
-                <td>$40.00</td>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.amount}"></td>
             </tr>
             <tr>
                 <td class="total">Total</td>
-                <td class="total">$365.00</td>
+                <td class="total" th:text="${total}"></td>
             </tr>
         </table>
 
