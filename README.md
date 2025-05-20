@@ -1,3 +1,5 @@
+Supported Java Version 17.0.15
+
 Need to starth the elastic search
 
 =================111111=====================================
