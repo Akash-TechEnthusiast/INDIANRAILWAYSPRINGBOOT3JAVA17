@@ -31,11 +31,11 @@ public class AuthenticationController {
     public JwtResponse createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 
         authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
-        final User userDetails = userRepository.findByUsername(
+        final User userDetails = userRepository.findByUserName(
                 jwtRequest.getUsername());
 
         log.info("Received Request at authenticaton controller");
-        final String jwt = jwtUtil.generateToken(userDetails.getUsername(), userDetails.getRoles());
+        final String jwt = jwtUtil.generateToken(userDetails.getUserName(), userDetails.getRoles());
 
         return new JwtResponse(jwt);
     }
@@ -56,7 +56,7 @@ public class AuthenticationController {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         // user.setPassword("test");
         user.setEmail(user.getEmail());
-        user.setMobileno(user.getMobileno());
+        user.setMobileNumber(user.getMobileNumber());
         // save the user to the database
         // ...
         User usera = userRepository.save(user);

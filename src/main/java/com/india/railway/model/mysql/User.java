@@ -12,7 +12,7 @@ public class User {
 
 	public User(Long id, String username, String email) {
 		this.id = id;
-		this.username = username;
+		this.userName = username;
 		this.email = email;
 	}
 
@@ -21,16 +21,19 @@ public class User {
 	private Long id;
 
 	@Column(nullable = false, unique = true)
-	private String username;
+	private String userName;
 
 	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(nullable = false, unique = true)
-	private String mobileno;
+	private String mobileNumber;
 
 	@Column(nullable = false, unique = true)
 	private String password;
+
+	@Column(nullable = false, unique = true)
+	private String confirmPassword;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -62,14 +65,14 @@ public class User {
 	}
 
 	public User(String username, String password, UserProfile userProfile) {
-		this.username = username;
+		this.userName = username;
 		this.password = password;
 		this.userProfile = userProfile;
 	}
 
 	public User(Long id, String username) {
 		this.id = id;
-		this.username = username;
+		this.userName = username;
 	}
 
 	public Long getId() {
@@ -80,12 +83,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
 
 	public String getEmail() {
@@ -96,12 +99,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getMobileno() {
-		return mobileno;
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
 
-	public void setMobileno(String moboleno) {
-		this.mobileno = moboleno;
+	public void setMobileNumber(String moboleno) {
+		this.mobileNumber = moboleno;
 	}
 
 	public String getPassword() {
@@ -110,6 +113,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public UserProfile getUserProfile() {

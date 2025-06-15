@@ -56,10 +56,10 @@ class AuthControllerTest {
                 // Arrange
                 User mockUser = new User();
                 mockUser.setId(1L);
-                mockUser.setUsername("Alice");
+                mockUser.setUserName("Alice");
                 mockUser.setEmail("alice@example.com");
                 mockUser.setPassword("google1234");
-                mockUser.setMobileno("+917075459707");
+                // mockUser.SET("+917075459707");
 
                 when(userRepository.save(any(User.class))).thenReturn(mockUser);
                 // Act & Assert

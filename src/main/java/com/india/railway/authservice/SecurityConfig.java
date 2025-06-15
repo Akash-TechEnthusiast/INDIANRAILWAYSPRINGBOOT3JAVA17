@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     try {
                         authorizeRequests
-                                .requestMatchers("/", "/authenticate", "/register", "/products/suggest",
+                                .requestMatchers("/", "/authenticate", "/register", "/user/**", "/products/suggest",
                                         "/user/forgot-password", "/user/reset-password", "/rest/api/producer",
                                         "/products",
                                         "/userstest/**", "/glocud/recordsave", "/api/student/**",

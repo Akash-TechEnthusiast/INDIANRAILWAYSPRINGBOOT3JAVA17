@@ -33,22 +33,22 @@ public class UserController {
 	// private PasswordEncoder passwordEncoder;
 
 	@PostMapping(path = "/adduser")
-	public @ResponseBody String addUsers(@RequestParam String userName, @RequestParam String number,
-			@RequestParam String email, @RequestParam String password) {
+	public @ResponseBody String addUsers(@RequestBody User user) {
 
-		User user = new User();
-		user.setUsername(userName);
+		User newuser = new User();
+		newuser.setUserName(user.getUserName());
 
-		user.setMobileno(number);
-		user.setEmail(email);
-		user.setPassword(new BCryptPasswordEncoder().encode(password));
+		newuser.setMobileNumber(user.getMobileNumber());
+		newuser.setEmail(user.getEmail());
+		newuser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+		newuser.setConfirmPassword(user.getConfirmPassword());
 
 		UserProfile up = new UserProfile();
 		up.setEmail("user@gmail.com");
 		up.setLastName("gandham");
-		user.setUserProfile(up);
+		newuser.setUserProfile(up);
 
-		userService.saveUser(user);
+		userService.saveUser(newuser);
 		return "Details got Saved";
 	}
 

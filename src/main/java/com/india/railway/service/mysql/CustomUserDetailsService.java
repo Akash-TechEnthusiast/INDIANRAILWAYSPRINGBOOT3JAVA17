@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        com.india.railway.model.mysql.User userDetails = userRepository.findByUsername(
+        com.india.railway.model.mysql.User userDetails = userRepository.findByUserName(
                 username);
 
         // Convert roles to GrantedAuthority
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRolename()))
                 .collect(Collectors.toList());
 
-        return new org.springframework.security.core.userdetails.User(userDetails.getUsername(),
+        return new org.springframework.security.core.userdetails.User(userDetails.getUserName(),
                 userDetails.getPassword(), authorities);
     }
 

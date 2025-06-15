@@ -54,12 +54,12 @@ class EntryControllerTest {
         public void testCreateUserTest() throws Exception {
                 // Arrange
                 User inputUser = new User();
-                inputUser.setUsername("Alice");
+                inputUser.setUserName("Alice");
                 inputUser.setEmail("alice@example.com");
 
                 User savedUser = new User();
                 savedUser.setId(1L);
-                savedUser.setUsername("Alice");
+                savedUser.setUserName("Alice");
                 savedUser.setEmail("alice@example.com");
 
                 when(userService.saveUsertest(any(User.class))).thenReturn(savedUser);
@@ -124,7 +124,7 @@ class EntryControllerTest {
                 // Arrange
                 User mockUser = new User();
                 mockUser.setId(1L);
-                mockUser.setUsername("Alice");
+                mockUser.setUserName("Alice");
                 mockUser.setEmail("alice@example.com");
 
                 when(userService.getUserById(1L)).thenReturn(mockUser);
