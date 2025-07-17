@@ -2,6 +2,7 @@ package com.india.railway.authservice;
 
 
 
+
 public class JwtRequest {
     private String username;
     private String password;
