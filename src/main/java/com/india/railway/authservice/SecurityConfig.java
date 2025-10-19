@@ -65,7 +65,7 @@ public class SecurityConfig {
                                         "/products",
                                         "/userstest/**", "/glocud/recordsave", "/api/student/**",
                                         "/products_elastic/**", "/products_elastic/fuzzymatchallfields",
-                                        "/api/countries/**", "api/**", "/employee/**", "/api/**")
+                                        "/api/countries/**", "api/**", "/employee/**", "/api/**","/test/**")
                                 .permitAll() // Allow
                                 // access
                                 // to
