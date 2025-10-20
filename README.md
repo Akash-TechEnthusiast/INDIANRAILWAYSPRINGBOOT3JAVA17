@@ -1,18 +1,18 @@
 Supported Java Version 17.0.15
 
 
-Need to starth the elastic search
+Need to start the elastic search
 
 =================111111=====================================
 
 cd /home/akash/Downloads/elasticsearch-7.17.27/bin
 ./elasticsearch
 
-linux cmd => elastic
+local linux cmd => elastic
 
 ================2222222 ====================================
 
-// for kakfa Operations 
+// for kafka Operations 
 
 http://localhost:9191/rest/api/producer?message=Hello
 
@@ -23,7 +23,7 @@ cd /home/akash/Documents/kafka_2.13-3.7.0
 
 bin/zookeeper-server-start.sh config/zookeeper.properties
 
-linux cmd => zoo
+local linux cmd => zoo
 
 ==============333333333333333====================================
 
@@ -41,7 +41,7 @@ cd /home/akash/Downloads/kibana-7.17.27-linux-x86_64/bin
 
 ./kibana
 
-linux cmd => kibana
+local linux cmd => kibana
 
 http://localhost:5601/
 

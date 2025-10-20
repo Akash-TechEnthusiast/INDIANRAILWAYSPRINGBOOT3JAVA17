@@ -23,16 +23,16 @@ public class User {
 	@Column(nullable = false, unique = true)
 	private String userName;
 
-	@Column(nullable = false, unique = true)
+	@Column
 	private String email;
 
-	@Column(nullable = false, unique = true)
+	@Column
 	private String mobileNumber;
 
-	@Column(nullable = false, unique = true)
+	@Column
 	private String password;
 
-	@Column(nullable = false, unique = true)
+	@Column
 	private String confirmPassword;
 
 	@OneToOne(cascade = CascadeType.ALL)
