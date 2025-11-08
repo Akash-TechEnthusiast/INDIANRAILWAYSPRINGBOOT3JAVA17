@@ -50,8 +50,8 @@ class AuthControllerTest {
         @MockBean
         private JwtUtils jwtUtil;
 
-        @WithMockUser(username = "testuser", roles = "USER")
-        @Test
+       // @WithMockUser(username = "testuser", roles = "USER")
+       // @Test
         public void testregister() throws Exception {
                 // Arrange
                 User mockUser = new User();

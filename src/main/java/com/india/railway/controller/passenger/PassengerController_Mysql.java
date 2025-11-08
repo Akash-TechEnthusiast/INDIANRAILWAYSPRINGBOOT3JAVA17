@@ -1,28 +1,29 @@
 package com.india.railway.controller.passenger;
 
+import com.india.railway.service.mysql.PassengerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.india.railway.model.mysql.Address;
 import com.india.railway.model.mysql.Passenger;
-import com.india.railway.model.mysql.Student_Mysql;
 import com.india.railway.model.mysql.Train;
 import com.india.railway.service.mysql.PassengerServiceImpl;
-import com.india.railway.service.mysql.StudentService_Mysql;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/passenger")
+@RequiredArgsConstructor
 // Allow React Frontend
 public class PassengerController_Mysql {
 
-    @Autowired
-    private PassengerServiceImpl passengerServiceImpl;
+    private final PassengerServiceImpl passengerServiceImpl;
+
+    // Single constructor — Spring injects the dependency
 
     @PostMapping("/create")
     public String addPassenger(@RequestBody Passenger passenger) throws IllegalAccessException {

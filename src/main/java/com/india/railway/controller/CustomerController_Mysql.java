@@ -1,5 +1,7 @@
 package com.india.railway.controller;
 
+import com.india.railway.yaml.ReadYamlFileProperties;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,9 @@ public class CustomerController_Mysql {
     @Autowired
     private CustomerService_Mysql customerService;
 
+
+
+
     /*
      * public List<Customer_Mysql> getAllCustomers() {
      * return customerService.getAllCustomers();
@@ -27,6 +32,8 @@ public class CustomerController_Mysql {
      * }
      * 
      */
+
+
 
     @GetMapping("/fetch_all_customers")
     public List<Map<String, Object>> getCustomerDropdown() {

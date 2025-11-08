@@ -27,11 +27,11 @@ spring:
       spanner:
         instance-id: demo-instance
         database: yt-demo
-
+  # database : indian_railway
   datasource:
-    url: jdbc:mysql://localhost:3306/indian_railway
-    username: root
-    password: WANAparthy@544
+    url: jdbc:mysql://localhost:3306/${mysql_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${mysql_user}   #root
+    password: ${mysql_password}  #WANAparthy@544
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -74,6 +74,20 @@ spring:
             token-uri: https://github.com/login/oauth/access_token
             user-info-uri: https://api.github.com/user
             user-name-attribute: login
+app:
+  passengers:
+    default-seat: A1
+    global-settings:
+      allow-children: true
+      max-count: 6
+    list:
+      - name: Alice
+        age: 30
+        ticket:
+          type: AC
+          number: T123
+      - name: Bob
+        age: 25
 
 # Uncomment and configure if needed:
 # spring:
@@ -100,3 +114,6 @@ spring:
 #     java:
 #       version: 10
 #     type: Spring Boot
+
+# yaml
+

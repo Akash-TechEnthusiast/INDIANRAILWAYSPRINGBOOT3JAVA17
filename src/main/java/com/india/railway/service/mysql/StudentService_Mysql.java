@@ -1,5 +1,7 @@
 package com.india.railway.service.mysql;
 
+import com.india.railway.yaml.ReadYamlFileProperties;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,19 @@ public class StudentService_Mysql {
 
     @Autowired
     private Student_Repo_Mysql studentRepository;
+
+
+    @Autowired
+    private ReadYamlFileProperties readYamlFileProperties;
+
+    @PostConstruct
+    public void getYamlFileValues() {
+        List<ReadYamlFileProperties.Passenger> kk= readYamlFileProperties.getList();
+        for (ReadYamlFileProperties.Passenger p : kk) {
+            System.out.println("hello ->"+p.getAge());
+            //log.info("Passenger Name: {}, Age: {}, Email: {}", p.getName(), p.getAge(), p.getTicket().getNumber());
+        }
+    }
 
     public List<Student_Mysql> getAllStudent() {
         return studentRepository.findAll();
