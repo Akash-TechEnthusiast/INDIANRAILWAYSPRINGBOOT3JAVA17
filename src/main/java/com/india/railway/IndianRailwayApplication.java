@@ -1,7 +1,10 @@
 package com.india.railway;
 
+import java.util.List;
 import java.util.Properties;
 
+import com.india.railway.yaml.ReadYamlFileProperties;
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
 @EnableTransactionManagement
@@ -30,14 +34,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class IndianRailwayApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(IndianRailwayApplication.class, args);
         log.info("App started");
         log.error("App started");
         log.debug("App started");
         log.warn("App started");
-
     }
+
 
     @Bean
     public Session MailSenderSession() {
@@ -60,5 +65,9 @@ public class IndianRailwayApplication {
         return session;
 
     }
+
+
+
+
 
 }
