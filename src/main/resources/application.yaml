@@ -10,8 +10,11 @@ server:
   #   context-path: /railway
 
 spring:
+  profiles:
+    active : dev # Change to 'prod' for production environment
   application:
     name: IndianRailwayGradle
+
 
   kafka:
     producer:
@@ -29,9 +32,9 @@ spring:
         database: yt-demo
   # database : indian_railway
   datasource:
-    url: jdbc:mysql://localhost:3306/${mysql_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: ${mysql_user}   #root
-    password: ${mysql_password}  #WANAparthy@544
+    url: jdbc:mysql://localhost:3306/indian_railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root   #root
+    password: WANAparthy@544  #WANAparthy@544
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
